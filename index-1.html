@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PixelPeak Digital — Websites, SEO, Google Ads &amp; Meta Ads</title>
+<meta name="description" content="PixelPeak Digital builds high-converting websites and runs SEO, Google Ads and Meta Ads campaigns that grow real businesses.">
+
+<style>
+  /* ---------- Tokens ---------- */
+  :root{
+    --bg: #0a0e1a;
+    --surface: #10162a;
+    --surface-2: #161d36;
+    --line: #232b48;
+    --text: #f2f4f8;
+    --muted: #8b93ab;
+    --teal: #00e0c0;
+    --pink: #ff5c8a;
+    --gold: #ffc857;
+    --radius: 14px;
+    --maxw: 1180px;
+    --display: 'Space Grotesk', 'Segoe UI', sans-serif;
+    --body: 'Inter', 'Segoe UI', sans-serif;
+    --mono: 'JetBrains Mono', 'Courier New', monospace;
+  }
+
+  @font-face{ /* fallback stack only, no external fetch needed */ }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  ul{margin:0;padding:0;list-style:none;}
+  h1,h2,h3,h4{ font-family:var(--display); margin:0; letter-spacing:-0.02em; }
+  p{margin:0;}
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 24px; }
+  section{ padding:96px 0; position:relative; }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:13px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--teal);
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:14px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:18px;height:1px;
+    background:var(--teal);
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:14px 26px;
+    border-radius:999px;
+    font-family:var(--body);
+    font-weight:600;
+    font-size:15px;
+    cursor:pointer;
+    border:1px solid transparent;
+    transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+  }
+  .btn-primary{
+    background:linear-gradient(120deg,var(--teal),#02b8a4);
+    color:#04140f;
+    box-shadow:0 10px 30px -10px rgba(0,224,192,.55);
+  }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 14px 36px -8px rgba(0,224,192,.7); }
+  .btn-ghost{
+    border-color:var(--line);
+    color:var(--text);
+    background:transparent;
+  }
+  .btn-ghost:hover{ border-color:var(--teal); color:var(--teal); }
+
+  /* ---------- Header ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:200;
+    background:rgba(10,14,26,.75);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    max-width:var(--maxw); margin:0 auto; padding:16px 24px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .logo{
+    font-family:var(--display); font-weight:700; font-size:20px;
+    display:flex; align-items:center; gap:9px;
+  }
+  .logo-mark{
+    width:30px;height:30px;border-radius:8px;
+    background:linear-gradient(135deg,var(--teal),var(--pink));
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--mono); font-size:14px; color:#04140f; font-weight:700;
+  }
+  .nav-links{ display:flex; gap:34px; font-size:14.5px; color:var(--muted); }
+  .nav-links a:hover{ color:var(--teal); }
+  .nav-cta{ display:flex; align-items:center; gap:16px; }
+  .nav-toggle{
+    display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px;
+  }
+  .nav-toggle span{ width:22px; height:2px; background:var(--text); display:block; }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:172px 0 96px;
+    background:
+      radial-gradient(600px 400px at 85% 10%, rgba(255,92,138,.15), transparent 60%),
+      radial-gradient(700px 500px at 5% 30%, rgba(0,224,192,.14), transparent 60%);
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.05fr .95fr; gap:64px; align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(34px,5vw,58px);
+    line-height:1.06;
+    margin-bottom:22px;
+  }
+  .hero h1 .accent{
+    background:linear-gradient(120deg,var(--teal),var(--gold));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero p.sub{
+    font-size:17px; color:var(--muted); max-width:480px; margin-bottom:34px;
+  }
+  .hero-actions{ display:flex; gap:16px; flex-wrap:wrap; margin-bottom:42px; }
+  .hero-stats{ display:flex; gap:34px; flex-wrap:wrap; }
+  .hero-stats div{ }
+  .hero-stats b{
+    font-family:var(--mono); font-size:26px; display:block; color:var(--text);
+  }
+  .hero-stats span{ font-size:13px; color:var(--muted); }
+
+  /* Mock browser / ranking climb signature element */
+  .mock{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 40px 80px -30px rgba(0,0,0,.6);
+  }
+  .mock-bar{
+    display:flex; align-items:center; gap:8px;
+    padding:12px 16px;
+    background:var(--surface-2);
+    border-bottom:1px solid var(--line);
+  }
+  .mock-dot{ width:9px;height:9px;border-radius:50%; background:#3a4260; }
+  .mock-search{
+    flex:1; margin-left:8px; background:var(--bg);
+    border-radius:8px; padding:6px 12px; font-family:var(--mono);
+    font-size:12px; color:var(--muted);
+  }
+  .mock-body{ padding:22px; font-family:var(--mono); font-size:13px; }
+  .rank-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:11px 0; border-bottom:1px dashed var(--line);
+    opacity:0; transform:translateX(-10px);
+    animation:riseIn .6s ease forwards;
+  }
+  .rank-row:nth-child(1){animation-delay:.2s}
+  .rank-row:nth-child(2){animation-delay:.4s}
+  .rank-row:nth-child(3){animation-delay:.6s}
+  .rank-row:last-child{ border-bottom:none; }
+  .rank-pos{
+    display:flex; align-items:center; gap:10px; color:var(--muted);
+  }
+  .rank-pos b{ color:var(--teal); font-size:16px; }
+  .rank-up{ color:var(--teal); font-size:12px; }
+  @keyframes riseIn{ to{ opacity:1; transform:translateX(0); } }
+
+  /* ---------- Marquee ticker ---------- */
+  .ticker-wrap{
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    background:var(--surface); overflow:hidden; padding:16px 0;
+  }
+  .ticker{
+    display:flex; gap:60px; white-space:nowrap;
+    animation:scroll 22s linear infinite;
+    font-family:var(--mono); font-size:14px; color:var(--muted);
+  }
+  .ticker span b{ color:var(--gold); }
+  @keyframes scroll{
+    from{ transform:translateX(0); } to{ transform:translateX(-50%); }
+  }
+
+  /* ---------- Services ---------- */
+  .section-head{ max-width:640px; margin-bottom:56px; }
+  .section-head h2{ font-size:clamp(28px,3.6vw,42px); margin-bottom:16px; }
+  .section-head p{ color:var(--muted); font-size:16px; }
+
+  .services-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:22px;
+  }
+  .service-card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:30px 26px;
+    transition:transform .3s ease, border-color .3s ease, background .3s ease;
+  }
+  .service-card:hover{
+    transform:translateY(-6px);
+    border-color:var(--teal);
+    background:var(--surface-2);
+  }
+  .service-icon{
+    width:46px;height:46px;border-radius:12px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:20px; margin-bottom:22px;
+    background:rgba(0,224,192,.12); color:var(--teal);
+  }
+  .service-card:nth-child(2) .service-icon{ background:rgba(255,92,138,.12); color:var(--pink); }
+  .service-card:nth-child(3) .service-icon{ background:rgba(255,200,87,.14); color:var(--gold); }
+  .service-card:nth-child(4) .service-icon{ background:rgba(0,224,192,.12); color:var(--teal); }
+  .service-card h3{ font-size:19px; margin-bottom:10px; }
+  .service-card p{ font-size:14.5px; color:var(--muted); margin-bottom:16px; }
+  .service-card ul li{
+    font-size:13px; color:var(--muted); padding:5px 0 5px 18px; position:relative;
+  }
+  .service-card ul li::before{
+    content:"→"; position:absolute; left:0; color:var(--teal);
+  }
+
+  /* ---------- Process ---------- */
+  .process{ background:var(--surface); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .process-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:0;
+  }
+  .process-step{
+    padding:0 22px; border-left:1px solid var(--line);
+  }
+  .process-step:first-child{ border-left:none; padding-left:0; }
+  .process-step .num{
+    font-family:var(--mono); color:var(--teal); font-size:13px; margin-bottom:14px; display:block;
+  }
+  .process-step h4{ font-size:17px; margin-bottom:10px; }
+  .process-step p{ font-size:14px; color:var(--muted); }
+
+  /* ---------- Results / testimonials ---------- */
+  .results-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:22px;
+  }
+  .result-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:28px;
+  }
+  .result-metric{
+    font-family:var(--mono); font-size:34px; color:var(--gold); margin-bottom:6px;
+  }
+  .result-card p.label{ font-size:13px; color:var(--muted); margin-bottom:18px; }
+  .result-quote{ font-size:14.5px; color:var(--text); margin-bottom:14px; }
+  .result-who{ font-size:13px; color:var(--muted); }
+
+  /* ---------- Pricing / CTA band ---------- */
+  .cta-band{
+    background:linear-gradient(120deg, #0d2b28, #131025);
+    border:1px solid var(--line);
+    border-radius:24px;
+    padding:56px;
+    display:flex; align-items:center; justify-content:space-between; gap:40px;
+    flex-wrap:wrap;
+  }
+  .cta-band h2{ font-size:clamp(24px,3.2vw,34px); max-width:520px; }
+  .cta-band p{ color:var(--muted); margin-top:10px; max-width:480px; font-size:15px; }
+
+  /* ---------- Contact ---------- */
+  .contact-grid{
+    display:grid; grid-template-columns:.9fr 1.1fr; gap:56px;
+  }
+  .contact-info h2{ font-size:clamp(26px,3.4vw,38px); margin-bottom:18px; }
+  .contact-info p{ color:var(--muted); font-size:15.5px; margin-bottom:28px; }
+  .contact-line{
+    display:flex; align-items:center; gap:14px; margin-bottom:16px; font-size:14.5px;
+  }
+  .contact-line .ico{
+    width:38px;height:38px;border-radius:10px;background:var(--surface-2);
+    display:flex;align-items:center;justify-content:center; border:1px solid var(--line); flex-shrink:0;
+  }
+  form{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:30px;
+    display:grid; gap:16px;
+  }
+  .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  label{ font-size:12.5px; color:var(--muted); display:block; margin-bottom:7px; font-family:var(--mono); }
+  input, select, textarea{
+    width:100%; background:var(--bg); border:1px solid var(--line); border-radius:9px;
+    padding:12px 14px; color:var(--text); font-family:var(--body); font-size:14.5px;
+  }
+  input:focus, select:focus, textarea:focus{ outline:2px solid var(--teal); outline-offset:1px; border-color:var(--teal); }
+  textarea{ resize:vertical; min-height:100px; }
+
+  /* ---------- Footer ---------- */
+  footer{
+    border-top:1px solid var(--line);
+    padding:44px 0 30px;
+  }
+  .foot-grid{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px;
+  }
+  .foot-links{ display:flex; gap:26px; font-size:13.5px; color:var(--muted); }
+  .foot-links a:hover{ color:var(--teal); }
+  .foot-copy{ font-size:13px; color:var(--muted); margin-top:20px; }
+
+  /* ---------- Floating Call/WhatsApp toggle ---------- */
+  .fab-wrap{
+    position:fixed; right:24px; bottom:24px; z-index:300;
+    display:flex; flex-direction:column; align-items:flex-end; gap:14px;
+  }
+  .fab-actions{
+    display:flex; flex-direction:column; gap:12px;
+    opacity:0; transform:translateY(12px) scale(.9);
+    pointer-events:none;
+    transition:opacity .25s ease, transform .25s ease;
+  }
+  .fab-wrap.open .fab-actions{
+    opacity:1; transform:translateY(0) scale(1); pointer-events:auto;
+  }
+  .fab-action{
+    display:flex; align-items:center; gap:10px;
+    background:var(--surface); border:1px solid var(--line);
+    padding:10px 16px 10px 10px; border-radius:999px;
+    font-size:13.5px; font-weight:600;
+    box-shadow:0 12px 24px -10px rgba(0,0,0,.5);
+    transition:transform .2s ease, border-color .2s ease;
+  }
+  .fab-action:hover{ transform:translateX(-4px); }
+  .fab-action .circ{
+    width:36px;height:36px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:16px; flex-shrink:0;
+  }
+  .fab-call .circ{ background:var(--gold); color:#241a00; }
+  .fab-wa .circ{ background:#25D366; color:#04140f; }
+  .fab-call:hover{ border-color:var(--gold); }
+  .fab-wa:hover{ border-color:#25D366; }
+
+  .fab-main{
+    width:62px;height:62px;border-radius:50%;
+    background:linear-gradient(135deg,var(--teal),var(--pink));
+    border:none; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 16px 32px -10px rgba(0,224,192,.55);
+    position:relative;
+  }
+  .fab-main .icon{
+    font-size:24px; color:#04140f; transition:transform .3s ease, opacity .3s ease; position:absolute;
+  }
+  .fab-main .icon.close{ opacity:0; transform:rotate(-45deg) scale(.6); }
+  .fab-wrap.open .fab-main .icon.open{ opacity:0; transform:rotate(45deg) scale(.6); }
+  .fab-wrap.open .fab-main .icon.close{ opacity:1; transform:rotate(0) scale(1); }
+  .fab-main::after{
+    content:"";
+    position:absolute; inset:-6px; border-radius:50%;
+    border:2px solid rgba(0,224,192,.4);
+    animation:pulse 2.2s ease-out infinite;
+  }
+  @keyframes pulse{
+    0%{ transform:scale(.9); opacity:.8; }
+    100%{ transform:scale(1.5); opacity:0; }
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:980px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .services-grid{ grid-template-columns:repeat(2,1fr); }
+    .process-grid{ grid-template-columns:repeat(2,1fr); }
+    .process-step{ border-left:none; padding-left:0; padding-bottom:26px; }
+    .results-grid{ grid-template-columns:1fr; }
+    .contact-grid{ grid-template-columns:1fr; }
+    .form-row{ grid-template-columns:1fr; }
+  }
+  @media (max-width:760px){
+    .nav-links{
+      position:fixed; top:66px; left:0; right:0; bottom:0;
+      background:var(--bg); flex-direction:column; padding:30px 24px; gap:22px;
+      font-size:18px;
+      transform:translateY(-120%); transition:transform .3s ease;
+    }
+    .nav-links.open{ transform:translateY(0); }
+    .nav-toggle{ display:flex; }
+    .nav-cta .btn-ghost{ display:none; }
+    section{ padding:64px 0; }
+    .services-grid{ grid-template-columns:1fr; }
+    .cta-band{ padding:34px 24px; flex-direction:column; text-align:left; }
+    .fab-wrap{ right:16px; bottom:16px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header>
+  <nav class="nav">
+    <a href="#top" class="logo">
+      <span class="logo-mark">PP</span> PixelPeak
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="#contact" class="btn btn-ghost">Get a quote</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- ================= HERO ================= -->
+<div id="top"></div>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Websites · SEO · Google Ads · Meta Ads</div>
+      <h1>Get found online, <span class="accent">get chosen</span>, get paid.</h1>
+      <p class="sub">We design conversion-ready websites and run SEO, Google Ads and Meta Ads campaigns that turn searches and scrolls into real customers for your business.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">📩 Get a free audit</a>
+        <a href="https://wa.me/919919704850" target="_blank" rel="noopener" class="btn btn-ghost">💬 Chat on WhatsApp</a>
+      </div>
+      <div class="hero-stats">
+        <div><b>180+</b><span>Websites launched</span></div>
+        <div><b>4.9×</b><span>Avg. ROAS on ads</span></div>
+        <div><b>92%</b><span>Clients ranked page 1</span></div>
+      </div>
+    </div>
+
+    <div class="mock">
+      <div class="mock-bar">
+        <span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span>
+        <div class="mock-search">🔍  best digital marketing agency near me</div>
+      </div>
+      <div class="mock-body">
+        <div class="rank-row">
+          <div class="rank-pos"><b>#1</b> yourbusiness.com</div>
+          <div class="rank-up">▲ from #14</div>
+        </div>
+        <div class="rank-row">
+          <div class="rank-pos"><b>#2</b> competitor-a.com</div>
+          <div class="rank-up" style="color:var(--muted)">—</div>
+        </div>
+        <div class="rank-row">
+          <div class="rank-pos"><b>#3</b> competitor-b.com</div>
+          <div class="rank-up" style="color:var(--muted)">▼ from #2</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TICKER ================= -->
+<div class="ticker-wrap">
+  <div class="wrap">
+    <div class="ticker" id="ticker">
+      <span>Organic traffic <b>+240%</b> avg. in 6 months</span>
+      <span>Google Ads ROAS <b>5.2×</b></span>
+      <span>Meta Ads CPL down <b>-38%</b></span>
+      <span>Websites delivered in <b>14 days</b></span>
+      <span>Keyword rankings: <b>Page 1</b> in 90 days</span>
+      <span>Organic traffic <b>+240%</b> avg. in 6 months</span>
+      <span>Google Ads ROAS <b>5.2×</b></span>
+      <span>Meta Ads CPL down <b>-38%</b></span>
+      <span>Websites delivered in <b>14 days</b></span>
+      <span>Keyword rankings: <b>Page 1</b> in 90 days</span>
+    </div>
+  </div>
+</div>
+
+<!-- ================= SERVICES ================= -->
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">What we do</div>
+      <h2>Four services. One growth engine.</h2>
+      <p>Each service works on its own — but stacked together, your website, search rankings and ad campaigns compound into predictable, repeatable leads.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🌐</div>
+        <h3>Website Design</h3>
+        <p>Fast, mobile-first websites built to convert visitors into enquiries.</p>
+        <ul>
+          <li>Custom UI/UX design</li>
+          <li>E-commerce &amp; landing pages</li>
+          <li>Speed &amp; mobile optimised</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">📈</div>
+        <h3>SEO</h3>
+        <p>Rank higher on Google and get consistent, free organic traffic.</p>
+        <ul>
+          <li>Keyword &amp; competitor research</li>
+          <li>On-page &amp; technical SEO</li>
+          <li>Local SEO &amp; Google Business</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🎯</div>
+        <h3>Google Ads</h3>
+        <p>Search, Display &amp; Shopping campaigns built for a real return on spend.</p>
+        <ul>
+          <li>Search &amp; Performance Max</li>
+          <li>Landing page &amp; conversion tracking</li>
+          <li>Monthly reporting &amp; scaling</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">📱</div>
+        <h3>Meta Ads</h3>
+        <p>Facebook &amp; Instagram campaigns that reach the right audience, at the right cost.</p>
+        <ul>
+          <li>Audience research &amp; creatives</li>
+          <li>Retargeting funnels</li>
+          <li>Pixel setup &amp; optimisation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROCESS ================= -->
+<section class="process" id="process">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:44px;">
+      <div class="eyebrow">How we work</div>
+      <h2>From audit to results, in four moves.</h2>
+    </div>
+    <div class="process-grid">
+      <div class="process-step">
+        <span class="num">01 / Audit</span>
+        <h4>Free audit</h4>
+        <p>We review your website, rankings and ad accounts to find quick wins.</p>
+      </div>
+      <div class="process-step">
+        <span class="num">02 / Build</span>
+        <h4>Build &amp; optimise</h4>
+        <p>We design or fix your website and set up SEO and ad foundations.</p>
+      </div>
+      <div class="process-step">
+        <span class="num">03 / Launch</span>
+        <h4>Launch campaigns</h4>
+        <p>Google Ads and Meta Ads go live, tracked from click to conversion.</p>
+      </div>
+      <div class="process-step">
+        <span class="num">04 / Scale</span>
+        <h4>Report &amp; scale</h4>
+        <p>Monthly reports and budget adjustments to grow what's working.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RESULTS ================= -->
+<section id="results">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Results</div>
+      <h2>Numbers our clients care about.</h2>
+    </div>
+    <div class="results-grid">
+      <div class="result-card">
+        <div class="result-metric">+240%</div>
+        <p class="label">Organic traffic in 6 months</p>
+        <p class="result-quote">Our enquiries doubled once the website and SEO were finally working together.</p>
+        <p class="result-who">— Local service business owner</p>
+      </div>
+      <div class="result-card">
+        <div class="result-metric">5.2×</div>
+        <p class="label">Return on Google Ads spend</p>
+        <p class="result-quote">They rebuilt our campaigns from scratch and cut our cost per lead almost in half.</p>
+        <p class="result-who">— D2C brand founder</p>
+      </div>
+      <div class="result-card">
+        <div class="result-metric">14 days</div>
+        <p class="label">Website design &amp; launch</p>
+        <p class="result-quote">Clear process, fast turnaround, and the site actually converts visitors.</p>
+        <p class="result-who">— E-commerce store owner</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA BAND ================= -->
+<section>
+  <div class="wrap">
+    <div class="cta-band">
+      <div>
+        <h2>Ready to grow with a website that works and ads that pay off?</h2>
+        <p>Message us on WhatsApp or call now — we'll audit your website and ad accounts for free.</p>
+      </div>
+      <div style="display:flex; gap:14px; flex-wrap:wrap;">
+        <a href="tel:+919919704850" class="btn btn-primary">📞 Call now</a>
+        <a href="https://wa.me/919919704850" target="_blank" rel="noopener" class="btn btn-ghost">💬 WhatsApp us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <div class="wrap contact-grid">
+    <div class="contact-info">
+      <div class="eyebrow">Get in touch</div>
+      <h2>Tell us about your business.</h2>
+      <p>Fill in the form or reach us directly — we usually reply within a few hours.</p>
+
+      <div class="contact-line">
+        <span class="ico">📞</span> <a href="tel:+919919704850">+91 99197 04850</a>
+      </div>
+      <div class="contact-line">
+        <span class="ico">💬</span> <a href="https://wa.me/919919704850" target="_blank" rel="noopener">WhatsApp: +91 99197 04850</a>
+      </div>
+      <div class="contact-line">
+        <span class="ico">✉️</span> <a href="mailto:hello@pixelpeak.digital">hello@pixelpeak.digital</a>
+      </div>
+    </div>
+
+    <form onsubmit="return handleSubmit(event)">
+      <div class="form-row">
+        <div>
+          <label for="name">Full name</label>
+          <input id="name" type="text" placeholder="Your name" required>
+        </div>
+        <div>
+          <label for="phone">Phone number</label>
+          <input id="phone" type="tel" placeholder="+91 00000 00000" required>
+        </div>
+      </div>
+      <div>
+        <label for="service">Service needed</label>
+        <select id="service">
+          <option>Website Design</option>
+          <option>SEO</option>
+          <option>Google Ads</option>
+          <option>Meta Ads</option>
+          <option>All of the above</option>
+        </select>
+      </div>
+      <div>
+        <label for="msg">Tell us about your project</label>
+        <textarea id="msg" placeholder="What are you trying to grow?"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" style="justify-content:center;">Send message</button>
+    </form>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <a href="#top" class="logo"><span class="logo-mark">PP</span> PixelPeak</a>
+      <ul class="foot-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <p class="foot-copy">© 2026 PixelPeak Digital. All rights reserved. Websites · SEO · Google Ads · Meta Ads.</p>
+  </div>
+</footer>
+
+<!-- ================= FLOATING CALL / WHATSAPP TOGGLE ================= -->
+<div class="fab-wrap" id="fabWrap">
+  <div class="fab-actions">
+    <a href="https://wa.me/919919704850" target="_blank" rel="noopener" class="fab-action fab-wa">
+      <span class="circ">💬</span> WhatsApp us
+    </a>
+    <a href="tel:+919919704850" class="fab-action fab-call">
+      <span class="circ">📞</span> Call us
+    </a>
+  </div>
+  <button class="fab-main" id="fabMain" aria-label="Contact options">
+    <span class="icon open">✆</span>
+    <span class="icon close">✕</span>
+  </button>
+</div>
+
+<script>
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  // Floating Call / WhatsApp toggle button
+  const fabWrap = document.getElementById('fabWrap');
+  const fabMain = document.getElementById('fabMain');
+  fabMain.addEventListener('click', () => {
+    fabWrap.classList.toggle('open');
+  });
+  document.addEventListener('click', (e) => {
+    if (!fabWrap.contains(e.target)) fabWrap.classList.remove('open');
+  });
+
+  // Contact form -> opens WhatsApp with prefilled message
+  function handleSubmit(e){
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const service = document.getElementById('service').value;
+    const msg = document.getElementById('msg').value.trim();
+    const text = encodeURIComponent(
+      `Hi PixelPeak, I'm ${name} (${phone}).\nInterested in: ${service}\n${msg}`
+    );
+    window.open(`https://wa.me/919919704850?text=${text}`, '_blank');
+    return false;
+  }
+</script>
+
+</body>
+</html>
